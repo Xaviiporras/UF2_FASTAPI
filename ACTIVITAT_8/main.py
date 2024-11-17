@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, HTTPException, Response
 from pydantic import BaseModel
 from typing import Optional
 
@@ -19,8 +19,7 @@ class Item(BaseModel):
 @app.get("/items/{item_id}")
 def get_item(item_id: int, response: Response):
     if item_id not in items:
-        response.status_code = 404
-        return("ERROR: Item not found ")
+        raise HTTPException(status_code=404, detail="Item not found")
     return {"Item id": item_id}
 
 @app.post("/items/")
