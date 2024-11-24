@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException, Response
 from pydantic import BaseModel
 from typing import List
-import users_sch
-import read
+import schemas.users_sch as users_sch
+import crud.read as read
 
 app3 = FastAPI()
 

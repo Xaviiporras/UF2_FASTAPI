@@ -1,4 +1,4 @@
-import connection as conn
+import db_connect.connection as conn
 
 def read():
     #Establece la conexión
