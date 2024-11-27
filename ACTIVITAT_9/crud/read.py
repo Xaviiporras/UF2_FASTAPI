@@ -1,10 +1,13 @@
 import db_connect.connection as conn
 
+
 def read():
     #Establece la conexión
     connect = conn.get_connection()
+
     if connect:
         try:
+
             cursor = connect.cursor()
             #generamos la consulta sql
             sql = "SELECT * FROM USERS"
