@@ -6,7 +6,7 @@ def create_table():
     if connection:
         try:
             cursor = connection.cursor()
-            sql = f"""CREATE TABLE WORDS(
+            sql = f"""CREATE TABLE IF NOT EXISTS WORDS(
                 id SERIAL PRIMARY KEY,
                 word VARCHAR(60),
                 theme VARCHAR(60)
@@ -36,7 +36,7 @@ def insert_record(pos, data):
             #Ejecuto la consulta sql con los valores que se han pasado por parametros
             cursor.execute(sql, values)
             # Guarda los cambios en la base de datos
-            connect.commit()
+            connect.commit() 
         except Exception as e:
             raise e
         
