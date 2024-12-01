@@ -15,3 +15,7 @@ class Tematic(BaseModel):
 @app.get("/penjat/tematica/opcions", response_model=List[dict])
 async def get_options():
 	return schema.themes_schema(functs.get_options())
+
+@app.get("/penjat/tematica/{option}", response_model=List[dict])
+async def get_paraula(option: str):
+    return schema.themes_schema(functs.get_random_word(option))
