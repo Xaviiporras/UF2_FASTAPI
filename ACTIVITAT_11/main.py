@@ -6,24 +6,25 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class Tematic(BaseModel):
-    option: str
+class Attemp(BaseModel):
+    id_log: str
+    letter: str
+    is_correct: bool
+    attemp_number: int
     
-@app.get("/penjat/startButton", response_model=List[dict])
+@app.get("/penjat/startButton")
 async def get_button_start():
+	return {"Text": "Començar partida"}
+
+
+@app.post("/penjat/attemps")
+async def get_attemps(attemp: Attemp):
 	return 
 
-@app.get("/penjat/secretWord", response_model=List[dict])
-async def get_secretWord():
-	return 
-@app.get("/penjat/attemps", response_model=List[dict])
+""" @app.get("/penjat/aphabet")
 async def get_attemps():
 	return 
 
-@app.get("/penjat/aphabet", response_model=List[dict])
-async def get_attemps():
-	return 
-
-@app.get("/penjat/stats", response_model=List[dict])
+@app.get("/penjat/stats")
 async def get_stats():
-	return 
+	return  """
