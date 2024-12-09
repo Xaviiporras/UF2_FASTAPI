@@ -1,6 +1,7 @@
 import connection as conn
+from main import Attempt
 
-def insertAttemp():
+def insertAttemp(attempt: Attempt):
     connect = conn.get_connection()
 
     if connect:
@@ -10,9 +11,9 @@ def insertAttemp():
                 INSERT INTO ATTEMPT (log_id, letter, is_correct, attempt_number)
                 VALUES (%s, %s, %s, %s)
             """
-            values = ()
+            values = (attempt.id_log, attempt.letter, attempt.is_correct, attempt.attemp_number)
             
-            cursor.execute(sql)
+            cursor.execute(sql, values)
 
             
             return {"message" : "Se ha introducido el registro correctamente"}

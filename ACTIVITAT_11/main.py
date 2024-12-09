@@ -2,11 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from pydantic import BaseModel
+import attemps_functs
 
 
 app = FastAPI()
 
-class Attemp(BaseModel):
+class Attempt(BaseModel):
     id_log: str
     letter: str
     is_correct: bool
@@ -18,8 +19,8 @@ async def get_button_start():
 
 
 @app.post("/penjat/attemps")
-async def get_attemps(attemp: Attemp):
-	return 
+async def get_attemps(attemp: Attempt):
+	return attemps_functs.insertAttemp
 
 """ @app.get("/penjat/aphabet")
 async def get_attemps():
