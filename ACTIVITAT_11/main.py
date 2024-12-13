@@ -8,9 +8,9 @@ app = FastAPI()
 
 
     
-@app.get("/penjat/startButton")
+@app.get("/penjat/startButton", response_model=List[dict])
 async def get_button_start():
-	return {"Text": "Començar partida"}
+	return schema.starts_schema(functs.get_startText())
 
 
 @app.post("/penjat/attempts")
@@ -21,6 +21,6 @@ async def get_attempts(attempt: Attempt):
 async def get_attemps(language: str):
 	return schema.alphabets_schema(functs.get_alphabet(language))
 
-""" @app.get("/penjat/stats")
-async def get_stats():
-	return  """
+@app.get("/penjat/stats/{name}", response_model=List[dict])
+async def get_stats(name: str):
+	return schema.stats_schema(functs.insertStats(name))
