@@ -1,15 +1,17 @@
 import connection as conn
 from pydantic import BaseModel
 
+
 class Attempt(BaseModel):
     id_log: str
     letter: str
     is_correct: bool
     attemp_number: int
 
+
 def get_startText():
     connect = conn.get_connection()
-    
+
     if connect:
         try:
             cursor = connect.cursor()
@@ -18,19 +20,43 @@ def get_startText():
             FROM WORDS
             WHERE THEME = 'GENERAL';
             """
-            
+
             cursor.execute(sql)
-            
+
             record = cursor.fetchall()
-            
+
             return record
-        
+
         except Exception as e:
             raise e
         finally:
             cursor.close()
             connect.close()
-            
+
+
+def get_Attempts(attempt: int) -> dict:
+    connect = conn.get_connection()
+
+    if connect:
+        try:
+            cursor = connect.cursor()
+            sql = """
+            SELECT COUNT(*) AS total_attempts
+            FROM attempt
+            WHERE log_id = %s AND is_correct = FALSE;
+            """
+
+            cursor.execute(sql, (attempt,))
+
+            record = cursor.fetchall()
+
+            return record
+
+        except Exception as e:
+            raise e
+        finally:
+            cursor.close()
+            connect.close()
 
 
 def insertAttempt(attempt: Attempt):

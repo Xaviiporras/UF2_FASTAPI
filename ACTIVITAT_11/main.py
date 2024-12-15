@@ -13,9 +13,13 @@ async def get_button_start():
 	return schema.starts_schema(functs.get_startText())
 
 
-@app.post("/penjat/attempts")
-async def get_attempts(attempt: Attempt):
+@app.post("/penjat/insertAttempts")
+async def insert_attempts(attempt: Attempt):
 	return functs.insertAttempt(attempt)
+
+@app.get("/penjat/attempts")
+async def get_attempts(attempt: int):
+	return schema.attempts_schema(functs.get_Attempts(attempt))
 
 @app.get("/penjat/alphabet/{language}", response_model=List[dict])
 async def get_attemps(language: str):

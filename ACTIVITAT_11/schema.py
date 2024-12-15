@@ -5,6 +5,13 @@ def start_schema(text) -> dict:
 def starts_schema(texts) -> dict:
 	return[start_schema(text) for text in texts]
 
+def attempt_schema(attempt) -> dict:
+	return {"attempts": attempt[0]
+            }
+
+def attempts_schema(attempts) -> dict:
+	return[attempt_schema(attempt) for attempt in attempts]
+
 def alphabet_schema(alphabet) -> dict:
 	return {"alphabet": alphabet[0]
             }
